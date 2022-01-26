@@ -1,0 +1,37 @@
+inorder o(n);
+merge two sorted list O(m)+o(n)
+class Solution {
+    void getAll(TreeNode* root, vector<int>& v){
+        if(root==NULL) return;
+        getAll(root->left, v);
+        v.push_back(root->val);
+        getAll(root->right, v);
+    }
+    vector<int> merge(vector<int>&v1, vector<int>& v2){
+        int m = v1.size(), n = v2.size();
+        int i=0, j=0;
+        vector<int> res;
+        while(i<m && j<n){
+            if(v1[i]<v2[j]) res.push_back(v1[i++]);
+            else if(v1[i]==v2[j]){
+                res.push_back(v1[i++]);
+                res.push_back(v2[j++]);
+                }
+            else
+                res.push_back(v2[j++]);
+        }
+        while(i<m) res.push_back(v1[i++]);
+        while(j<n) res.push_back(v2[j++]);
+        return res;
+    }
+public:
+    
+    vector<int> getAllElements(TreeNode* root1, TreeNode* root2) {
+        vector<int> v1;
+        getAll(root1, v1);
+        vector<int> v2; 
+        getAll(root2, v2);
+        return merge(v1,v2);
+        
+    }
+};
