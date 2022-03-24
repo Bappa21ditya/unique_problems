@@ -1,0 +1,15 @@
+int solve(vector<int>& nums) {
+    int mx=0;
+    int m1=0;
+    for(int i=0;i<nums.size();i++)
+    {
+        mx+=nums[i];
+        if(mx<0)
+        {
+            m1+=abs(mx);
+            mx=0;
+        }
+    }
+    return m1+1;
+    
+}
